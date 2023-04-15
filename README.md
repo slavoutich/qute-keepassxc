@@ -5,6 +5,7 @@ Introduction
 
 This is a [qutebrowser][2] [userscript][5] to fill website credentials from a [KeepassXC][1] password database.
 
+The difference from original [`qute-keepassxc`][7] is that it uses `wofi` instead of `rofi` for picking the database entry out of several possibilities.
 
 Installation
 ============
@@ -16,9 +17,9 @@ Second, you must make sure to have a working private-public-key-pair in your [GP
 
 
 Then, simply check out this repository and, if you do not want to configure an explicit path, symlink the
-`qute-keepassxc` to your `~/.local/share/qutebrowser/userscripts/qute-keepassxc`.
+`qute-keepassxc-wofi` to your `~/.local/share/qutebrowser/userscripts/qute-keepassxc-wofi`.
 Install the python module `pynacl`.
-Make sure `qute-keepassxc` is executable.
+Make sure `qute-keepassxc-wofi` is executable.
 
 
 Finally, adapt your qutebrowser config.
@@ -26,11 +27,11 @@ You can e.g. add the following lines to your `~/.config/qutebrowser/config.py`
 Remember to replace `ABC1234` with your actual GPG key.
 
 ```python
-config.bind('<Alt-Shift-u>', 'spawn --userscript qute-keepassxc --key ABC1234', mode='insert')
-config.bind('pw', 'spawn --userscript qute-keepassxc --key ABC1234', mode='normal')
+config.bind('<Alt-Shift-u>', 'spawn --userscript qute-keepassxc-wofi --key ABC1234', mode='insert')
+config.bind('pw', 'spawn --userscript qute-keepassxc-wofi --key ABC1234', mode='normal')
 ```
 
-If you did not symlink `qute-keepassxc` you need to provide the full path here.
+If you did not symlink `qute-keepassxc-wofi` you need to provide the full path here.
 
 N.B. To manage multiple accounts you need the [rofi](https://github.com/davatorium/rofi) program.
 
@@ -63,12 +64,12 @@ TOTP
 
 This script recently received experimental TOTP support.
 To use it, you need to have working TOTP authentication within KeepassXC.
-Then call `qute-keepassxc` with the `--totp` flags.
+Then call `qute-keepassxc-wofi` with the `--totp` flags.
 
 For example, I have the following line in my `config.py`:
 
 ```python
-config.bind('pt', 'spawn --userscript qute-keepassxc --key ABC1234 --totp', mode='normal')
+config.bind('pt', 'spawn --userscript qute-keepassxc-wofi --key ABC1234 --totp', mode='normal')
 ```
 
 For now this script will simply insert the TOTP-token into the currently selected
@@ -105,6 +106,7 @@ Links
 [4]: https://github.com/keepassxreboot/keepassxc-browser/blob/develop/keepassxc-protocol.md
 [5]: https://github.com/qutebrowser/qutebrowser/blob/master/doc/userscripts.asciidoc
 [6]: https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_configure_keepassxc_browser
+[7]: https://github.com/ususdei/qute-keepassxc
 
 
 License
